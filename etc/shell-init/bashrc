@@ -1,0 +1,219 @@
+
+# check os
+if [[ "$(uname)" == "Darwin" ]]; then
+  OS=Mac
+elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]] ; then
+  OS=Linux
+elif [[ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]] ; then
+  OS=Windows
+fi
+# backup environment variables
+if [[ ! ${LOADED} ]]; then
+  BK_PATH=${PATH}
+  if [[ ${OS} == Linux ]]; then
+    BK_LIB_PATH=${LD_LIBRARY_PATH}
+  elif [[ ${OS} == Mac ]]; then
+    BK_LIB_PATH=${DYLD_LIBRARY_PATH}
+  fi
+fi
+LOADED=1
+# initialize new additional path
+ADD_PATH=""
+ADD_LIB_PATH=""
+
+# terminal
+export PS1='\u@\h:\w $ '
+export TERM=xterm-256color
+
+# ls
+if ls --color 1>/dev/null 2>&1 ; then
+  # GNU ls
+  alias ls='ls --color=auto'
+elif ls -G 1>/dev/null 2>&1 ; then
+  # BSD ls
+  export CLICOLOR=1
+  export LSCOLORS="gxBxhxDxfxhxhxhxhxcxcx"
+else
+  # Solaris ls
+  echo "Solaris ls"
+fi
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ll -a'
+alias lt='ls -ltr'
+
+# grep
+export GREP_OPTIONS='--color=auto'
+alias grep='grep -n'
+
+
+# For linux, link data directory brute force
+function lkdata() {
+  DATA_DIR=(/bigdata/ygao/data
+            /datasets/bigdata/ygao/data
+            /net/snake05/bigdata/ygao/data)
+  SUCCESS_DIR=false
+  for i in ${DATA_DIR[@]}; do
+    if [[ -d ${i} ]]; then
+      if [[ -L ${HOME}/data ]]; then
+        rm ${HOME}/data
+      fi
+      ln -s ${i} ${HOME}/data
+      echo -e "\033[32msuccessfully link data directory from ${i} \033[0m"
+      SUCCESS_DIR=true
+      break
+    fi
+  done
+  if [[ "${SUCCESS_DIR}" != true ]]; then
+    echo -e "\033[35mdata directory is NOT found \033[0m"
+  fi
+}
+
+
+ADD_PATH=""
+ADD_LIB_PATH=""
+# OS dependent and local directory
+if [[ ${OS} == Mac ]]; then
+  EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+  QTSTR=-
+  LOCAL=clang-omp
+  ADD_PATH=/Developer/NVIDIA/CUDA-7.5/bin:${ADD_PATH}
+  ADD_LIB_PATH=/Developer/NVIDIA/CUDA-7.5/lib:/usr/local/opt/openblas/lib:${ADD_LIB_PATH}
+  export HOMEBREW_GITHUB_API_TOKEN=06318a3d7fae4f26ec4f6081dfcf52e86a933cd6
+elif [[ ${OS} == Linux ]] ; then
+  EMACS=emacs
+  QTSTR=Qt-4.8.6
+  if [[ ${HOSTNAME} == ml* ]]; then
+    LOCAL=ml74
+    LUASTR=qlua
+  elif [[ ${HOSTNAME} == snake* ]]; then
+    LOCAL=snake06
+    LUASTR=qlua
+    ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
+    ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
+  fi
+  # lkdata
+fi
+
+# emacs
+alias Emacs="$EMACS &"
+alias emacs="$EMACS -nw"
+
+# default editor
+export EDITOR='emacs -nw'
+
+
+# backup current environment variables' status
+BK_PATH_LOCAL=${ADD_PATH}${BK_PATH}
+BK_LIB_PATH_LOCAL=${ADD_LIB_PATH}${BK_LIB_PATH}
+export PATH=${BK_PATH_LOCAL}
+if [[ ${OS} == Linux ]]; then
+  export LD_LIBRARY_PATH=${BK_LIB_PATH_LOCAL}
+elif [[ ${OS} == Mac ]]; then
+  export DYLD_LIBRARY_PATH=${BK_LIB_PATH_LOCAL}
+fi
+
+
+# special for path under local directory
+function lk() {
+    # define local dir used for all following
+    LOCALDIR=${HOME}/local-${1}
+    
+    # check existence
+    if [[ ! -d ${LOCALDIR} ]]; then
+      if [[ ! -d ${HOME}/local ]]; then
+        echo -e "\033[35mBoth ${LOCALDIR} and ${HOME}/local NOT found \033[0m"
+        return
+      else
+        if [[ -L ${HOME}/local ]]; then
+          echo -e "\033[32m${LOCALDIR} NOT found, but soft link ${HOME}/local exists... \033[0m"
+        else
+          echo -e "\033[32m${LOCALDIR} NOT found, but directory ${HOME}/local exists... \033[0m"
+        fi
+        LOCALDIR=${HOME}/local
+      fi
+    else
+      # link ~/local
+      if [[ -L ${HOME}/local ]]; then
+        rm ${HOME}/local
+      fi
+      ln -s ${LOCALDIR} ${HOME}/local
+    fi
+    
+    BINDIR=${LOCALDIR}/bin
+    
+    # python
+    if [[ -L ${BINDIR}/python ]]; then
+      rm ${BINDIR}/python
+    fi
+    if [[ -L ${BINDIR}/pip ]]; then
+      rm ${BINDIR}/pip
+    fi
+    if [[ -e ${BINDIR}/python3 && ! -f ${BINDIR}/python ]]; then
+      ln -s ${BINDIR}/python3 ${BINDIR}/python
+    elif [[ -e /usr/local/bin/python3 && ! -f ${BINDIR}/python ]]; then
+      ln -s /usr/local/bin/python3 ${BINDIR}/python
+    fi
+    if [[ -e ${BINDIR}/pip3 && ! -f ${BINDIR}/pip ]]; then
+      ln -s ${BINDIR}/pip3 ${BINDIR}/pip
+    elif [[ -e /usr/local/bin/pip3 && ! -f ${BINDIR}/pip ]]; then
+      ln -s /usr/local/bin/pip3 ${BINDIR}/pip
+    fi
+    export IPYTHONDIR=${LOCALDIR}/.ipython
+    export JUPYTER_CONFIG_DIR=${LOCALDIR}/.jupyter
+
+    # for GNU global (gtags) with pygments support
+    export GTAGSCONF=${LOCALDIR}/share/gtags/gtags.conf
+    export GTAGSLABEL=pygments
+
+    # list all needed path here
+    ARRAY_PATH_LOCAL=(${BINDIR}
+                      ${LOCALDIR}/${QTSTR}/bin)
+    ARRAY_LIB_PATH_LOCAL=(${LOCALDIR}/lib
+                          ${LOCALDIR}/${QTSTR}/lib)
+
+    # add local path and lib
+    ADD_PATH_LOCAL=""
+    ADD_LIB_PATH_LOCAL=""
+    for i in ${ARRAY_PATH_LOCAL[@]}; do
+      if [[ -d ${i} ]]; then
+        ADD_PATH_LOCAL=${i}:${ADD_PATH_LOCAL}
+      fi
+    done
+    for i in ${ARRAY_LIB_PATH_LOCAL[@]}; do
+      if [[ -d ${i} ]]; then
+        ADD_LIB_PATH_LOCAL=${i}:${ADD_LIB_PATH_LOCAL}
+      fi
+    done
+    
+    # export environment variables
+    if [[ ${ADD_PATH_LOCAL} ]]; then
+      export PATH=${ADD_PATH_LOCAL}${BK_PATH_LOCAL}
+    fi
+    if [[ ${ADD_LIB_PATH_LOCAL} ]]; then
+      if [[ ${OS} == Linux ]]; then
+        export LD_LIBRARY_PATH=${ADD_LIB_PATH_LOCAL}${BK_LIB_PATH_LOCAL}
+      elif [[ ${OS} == Mac ]]; then
+        export DYLD_LIBRARY_PATH=${ADD_LIB_PATH_LOCAL}${BK_LIB_PATH_LOCAL}
+      fi
+    fi
+    
+    # torch environment
+    if [[ -e ${LOCALDIR}/torch7/install/bin/torch-activate ]]; then
+      . ${LOCALDIR}/torch7/install/bin/torch-activate
+    fi
+    if [[ -L ${BINDIR}/lua ]]; then
+        rm ${BINDIR}/lua
+    fi
+    ln -s ${LOCALDIR}/torch7/install/bin/${LUASTR} ${BINDIR}/lua
+    
+
+    # if mac, try to set corresponding compiler
+    if [[ ${OS} == Mac ]]; then
+      CC=`which ${1}`
+      CXX=`which ${1}++`
+      echo -e "\033[32mBased on LOCAL=${1}, guess and set:\nCC=${CC}\nCXX=${CXX} \033[0m"
+    fi
+}
+
+lk $LOCAL
