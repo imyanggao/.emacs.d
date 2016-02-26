@@ -32,6 +32,15 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'lua-mode-hook 'ansi-color-for-comint-mode-on)
 
+;; start emacs without welcome screen
+(setq inhibit-startup-message t)
+;; disable the menu bar
+(menu-bar-mode -1)
+;; disable the toolbar
+(tool-bar-mode -1)
+;; disable the scrollbar
+(toggle-scroll-bar -1)
+
 ;; use spaces instead of tabs, and set default tab width
 (setq-default indent-tabs-mode nil)
 (setq indent-line-function 'insert-tab)

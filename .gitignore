@@ -1,0 +1,5 @@
+# ignore all *.el, except init.el
+*.el
+!init.el
+backups
+elpa
