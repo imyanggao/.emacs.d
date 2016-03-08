@@ -5,6 +5,7 @@
 
 (require-package 'projectile)
 (projectile-global-mode)
+(setq projectile-enable-idle-timer 1)
 
 
 (provide 'init-projectile)

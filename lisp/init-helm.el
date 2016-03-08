@@ -31,6 +31,8 @@
 (require-package 'helm-swoop)
 (require 'helm-swoop)
 (global-set-key (kbd "C-s") 'helm-swoop)
+;; split window inside the current window
+(setq helm-swoop-split-with-multiple-windows t)
 
 ;; use helm-projectile
 (require-package 'helm-projectile)

@@ -89,9 +89,10 @@ elif [[ ${OS} == Linux ]] ; then
   elif [[ ${HOSTNAME} == snake* ]]; then
     LOCAL=snake06
     LUASTR=qlua
-    ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
-    ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
   fi
+  ## TODO: write a check or loop function to check existence
+  ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
+  ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH} 
   # lkdata
 fi
 

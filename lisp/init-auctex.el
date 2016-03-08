@@ -28,6 +28,12 @@
 ;; (TeX-global-PDF-mode t)
 
 ;; pdf viewers
+(setq TeX-view-program-list
+      '(("SumatraPDF" "SumatraPDF.exe %o")
+        ("Gsview" "gsview32.exe %o")
+        ("Okular" "okular --unique %o")
+        ("Evince" "evince %o")
+        ("Firefox" "firefox %o")))
 (cond
  ((eq system-type 'windows-nt)
   (add-hook 'LaTeX-mode-hook
@@ -37,8 +43,11 @@
  ((eq system-type 'gnu/linux)
   (add-hook 'LaTeX-mode-hook
             (lambda ()
-              (setq TeX-view-program-selection '((output-pdf "Okular")
-                                                 (output-dvi "Okular")))))))
+              (setq TeX-view-program-selection '((output-pdf "Evince")
+                                                 (output-dvi "Evince")))
+              ;; (setq TeX-view-program-selection '((output-pdf "Okular")
+              ;;                                    (output-dvi "Okular")))
+              ))))
 
 
 (provide 'init-auctex)
