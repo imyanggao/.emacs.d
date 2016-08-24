@@ -51,7 +51,8 @@ alias grep='grep -n'
 function lkdata() {
   DATA_DIR=(/bigdata/ygao/data
             /datasets/bigdata/ygao/data
-            /net/snake05/bigdata/ygao/data)
+            /net/snake05/bigdata/ygao/data
+            /net/mlfs01/export/users/ygao/data)
   SUCCESS_DIR=false
   for i in ${DATA_DIR[@]}; do
     if [[ -d ${i} ]]; then
@@ -86,12 +87,15 @@ elif [[ ${OS} == Linux ]] ; then
   if [[ ${HOSTNAME} == ml* ]]; then
     LOCAL=ml74
     LUASTR=qlua
-  elif [[ ${HOSTNAME} == snake* ]]; then
+  elif [[ ${HOSTNAME} == snake06 ]]; then
     LOCAL=snake06
+    LUASTR=qlua
+  elif [[ ${HOSTNAME} == snake08 ]]; then
+    LOCAL=snake08
     LUASTR=qlua
   fi
   ## TODO: write a check or loop function to check existence
-  ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
+  ADD_PATH=/usr/local/cuda/bin:${HOME}/local-snake08/install/meld-3.12.3/bin:${ADD_PATH}
   ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH} 
   # lkdata
 fi
