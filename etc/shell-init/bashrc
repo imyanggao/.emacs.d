@@ -87,17 +87,30 @@ elif [[ ${OS} == Linux ]] ; then
   if [[ ${HOSTNAME} == ml* ]]; then
     LOCAL=ml74
     LUASTR=qlua
-  elif [[ ${HOSTNAME} == snake06 ]]; then
-    LOCAL=snake06
-    LUASTR=qlua
-  elif [[ ${HOSTNAME} == snake08 ]]; then
-    LOCAL=snake08
-    LUASTR=qlua
+  elif [[ ${HOSTNAME} == snake* ]]; then
+    if [[ ${HOSTNAME} == snake06 ]]; then
+      LOCAL=snake06
+      LUASTR=qlua
+    fi
+    if [[ ${HOSTNAME} == snake08 ]]; then
+      LOCAL=snake08
+      LUASTR=qlua
+    fi
+    ADD_PATH=/usr/local/cuda/bin:${HOME}/local-snake08/install/meld-3.12.3/bin:${ADD_PATH}
+    ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
+  elif [[ ${HOSTNAME} == beast ]]; then
+    LOCAL=beast
+    ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
+    ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
+  elif [[ ${HOSTNAME} == mcp.sci.utah.edu ]] || [[ ${HOSTNAME} == tesla* ]] ; then
+    LOCAL=tesla
+    ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
+    ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
+  elif [[ ${HOSTNAME} == wopr1.sci.utah.edu ]] || [[ ${HOSTNAME} == kepler* ]] ; then
+    LOCAL=kepler
+    ADD_PATH=/usr/local/cuda-7.0/bin:${ADD_PATH}
+    ADD_LIB_PATH=/usr/local/cuda-7.0/lib64:${ADD_LIB_PATH}
   fi
-  ## TODO: write a check or loop function to check existence
-  ADD_PATH=/usr/local/cuda/bin:${HOME}/local-snake08/install/meld-3.12.3/bin:${ADD_PATH}
-  ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH} 
-  # lkdata
 fi
 
 # emacs
@@ -122,7 +135,11 @@ fi
 # special for path under local directory
 function lk() {
     # define local dir used for all following
-    LOCALDIR=${HOME}/local-${1}
+    if [[ ! ${1} ]]; then
+      LOCALDIR=${HOME}/local-${LOCAL}
+    else
+      LOCALDIR=${HOME}/local-${1}
+    fi
     
     # check existence
     if [[ ! -d ${LOCALDIR} ]]; then
