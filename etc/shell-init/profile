@@ -1,4 +1,4 @@
-echo "profile called"
+#echo "profile called"
 if [ -n "$BASH_VERSION" ]; then
   # for MacOS
   if [ -f "$HOME/.bashrc" ] ; then
