@@ -41,6 +41,10 @@
 ;; disable the scrollbar
 (toggle-scroll-bar -1)
 
+;; set default font
+(add-to-list 'default-frame-alist '(font . "Consolas 15"))
+(set-face-attribute 'default t :font "Consolas 15")
+
 ;; use spaces instead of tabs, and set default tab width
 (setq-default indent-tabs-mode nil)
 (setq indent-line-function 'insert-tab)
