@@ -1,4 +1,4 @@
-
+#echo "bashrc called"
 # check os
 if [[ "$(uname)" == "Darwin" ]]; then
   OS=Mac
@@ -75,14 +75,12 @@ ADD_PATH=""
 ADD_LIB_PATH=""
 # OS dependent and local directory
 if [[ ${OS} == Mac ]]; then
-  # EMACS=${HOME}/.emacs.d/bin/emacs
   QTSTR=-
   LOCAL=clang-omp
   ADD_PATH=/Developer/NVIDIA/CUDA-7.5/bin:${HOME}/.emacs.d/bin:${ADD_PATH}
   ADD_LIB_PATH=/Developer/NVIDIA/CUDA-7.5/lib:/usr/local/opt/openblas/lib:${ADD_LIB_PATH}
   export HOMEBREW_GITHUB_API_TOKEN=06318a3d7fae4f26ec4f6081dfcf52e86a933cd6
 elif [[ ${OS} == Linux ]] ; then
-  Emacs=emacs
   QTSTR=Qt-4.8.6
   if [[ ${HOSTNAME} == ml* ]]; then
     LOCAL=ml74
@@ -113,11 +111,8 @@ elif [[ ${OS} == Linux ]] ; then
   fi
 fi
 
-# emacs
-alias emacs="Emacs -nw"
-
 # default editor
-export EDITOR='emacs -nw'
+#export EDITOR='emacs -nw'
 
 
 # backup current environment variables' status
@@ -144,15 +139,14 @@ function lk() {
     if [[ ! -d ${LOCALDIR} ]]; then
       if [[ ! -d ${HOME}/local ]]; then
         echo -e "\033[35mBoth ${LOCALDIR} and ${HOME}/local NOT found \033[0m"
-        return
       else
         if [[ -L ${HOME}/local ]]; then
           echo -e "\033[32m${LOCALDIR} NOT found, but soft link ${HOME}/local exists... \033[0m"
         else
           echo -e "\033[32m${LOCALDIR} NOT found, but directory ${HOME}/local exists... \033[0m"
         fi
-        LOCALDIR=${HOME}/local
       fi
+      return
     else
       # link ~/local
       if [[ -L ${HOME}/local ]]; then
@@ -236,5 +230,5 @@ function lk() {
       echo -e "\033[32mBased on LOCAL=${1}, guess and set:\nCC=${CC}\nCXX=${CXX} \033[0m"
     fi
 }
-
+  
 lk $LOCAL

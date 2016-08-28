@@ -1,0 +1,9 @@
+#echo "bashrc2 called"
+if [[ ! `command -v Emacs` ]] ; then
+  if [[ `command -v emacs` ]] ; then
+    alias Emacs="`command -v emacs`"
+  fi
+fi
+if [[ `command -v Emacs` ]] ; then
+  alias emacs="Emacs -nw"
+fi
