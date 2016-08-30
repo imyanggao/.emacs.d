@@ -1,0 +1,42 @@
+
+Host snake06
+  HostName  snake06
+  User      ygao
+
+Host snake08
+  HostName  snake06
+  User      ygao
+
+Host ml74
+  HostName  ml74
+  User      ygao
+  
+Host kepler1
+  HostName  kepler1.sci.utah.edu
+  User      gao
+
+Host kepler6
+  HostName  kepler6.sci.utah.edu
+  User      gao
+
+Host wopr1
+  HostName  wopr1.sci.utah.edu
+  User      gao
+
+Host tesla1
+  HostName  tesla1.sci.utah.edu
+  User      gao
+
+Host tesla6
+  HostName  tesla6.sci.utah.edu
+  User      gao
+
+Host mcp
+  HostName  mcp.sci.utah.edu
+  User      gao
+
+Host beast
+  HostName  beast.sci.utah.edu
+  User      gao
+
+  
