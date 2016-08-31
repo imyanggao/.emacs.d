@@ -77,7 +77,7 @@ ADD_LIB_PATH=""
 if [[ ${OS} == Mac ]]; then
   QTSTR=-
   LOCAL=clang-omp
-  ADD_PATH=/Developer/NVIDIA/CUDA-7.5/bin:${HOME}/.emacs.d/bin:${ADD_PATH}
+  ADD_PATH=/Developer/NVIDIA/CUDA-7.5/bin:${HOME}/.emacs.d/macbin:${ADD_PATH}
   ADD_LIB_PATH=/Developer/NVIDIA/CUDA-7.5/lib:/usr/local/opt/openblas/lib:${ADD_LIB_PATH}
   export HOMEBREW_GITHUB_API_TOKEN=06318a3d7fae4f26ec4f6081dfcf52e86a933cd6
 elif [[ ${OS} == Linux ]] ; then
@@ -110,6 +110,7 @@ elif [[ ${OS} == Linux ]] ; then
     ADD_LIB_PATH=/usr/local/cuda-7.0/lib64:${ADD_LIB_PATH}
   fi
 fi
+ADD_PATH=${HOME}/.emacs.d/bin:${ADD_PATH}
 
 # default editor
 #export EDITOR='emacs -nw'
