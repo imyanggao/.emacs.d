@@ -14,10 +14,12 @@ do
 done
 
 cur_date=`date +"%Y%m%d_%k%M%S"`
+host=`hostname`
 log_stdout=${cmd_str}_${cur_date}.stdout
 log_stderr=${cmd_str}_${cur_date}.stderr
+time_cmd="time ${cmd}"
 
-nohup bash -c "time ${cmd}" > ${log_stdout} 2>> ${log_stderr} < /dev/null &
+nohup bash -c ${time_cmd} > ${log_stdout} 2>> ${log_stderr} < /dev/null &
 pid=`echo $!`
-echo "pid = ${pid}" > ${log_stderr}
+echo "run  '${time_cmd}'  on $host  with pid = ${pid}" > ${log_stderr}
 
