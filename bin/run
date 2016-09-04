@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cur_date=`date +"%Y%m%d_%H%M%S"`
+host=`hostname`
+
 i_arg=0
 for arg in "$@"
 do
@@ -13,13 +16,19 @@ do
   fi
 done
 
-cur_date=`date +"%Y%m%d_%H%M%S"`
-host=`hostname`
-log_stdout=${cmd_str}_${cur_date}.out
-log_stderr=${cmd_str}_${cur_date}.err
+log_str=${cmd_str}_${cur_date}
+
+if [[ ${cmd_str} =~ "th_" ]] ; then
+  cmd=${cmd}" -l "${log_str}".log"
+fi
+
+log_stdout=${log_str}.out
+log_stderr=${log_str}.err
 time_cmd="time ${cmd}"
 
 nohup bash -c "(time ${cmd} > ${log_stdout})" &>> ${log_stderr} < /dev/null &
 pid=`echo $!`
 echo "run  '${time_cmd}'  on $host  with pid = ${pid}" >> ${log_stderr}
+echo "" >> ${log_stderr}
 
+# ps -o pid,ppid | sed -n '/14379/p'
