@@ -27,10 +27,10 @@ log_stderr=${log_str}.err
 
 nohup bash -c "(time ${cmd} > ${log_stdout})" &> ${log_stderr} < /dev/null &
 
-ppppid=$$
-pppid=`pgrep -P ${ppppid} 2> /dev/null`
-ppid=`pgrep -P ${pppid} 2> /dev/null`
-pid=`pgrep -P ${ppid} 2> /dev/null`
+ppppid="$$"
+pppid=`pgrep -P ${ppppid} | head -n1 |awk '{print $1}' 2> /dev/null`
+ppid=`pgrep -P ${pppid} | head -n1 |awk '{print $1}' 2> /dev/null`
+pid=`pgrep -P ${ppid} | head -n1 |awk '{print $1}' 2> /dev/null`
 if [[ ! -z ${pid} ]] ; then
   id=${pid}
 else
