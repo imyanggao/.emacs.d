@@ -24,11 +24,29 @@ fi
 
 log_stdout=${log_str}.out
 log_stderr=${log_str}.err
-time_cmd="time ${cmd}"
 
-nohup bash -c "(time ${cmd} > ${log_stdout})" &>> ${log_stderr} < /dev/null &
-pid=`echo $!`
-echo "run  '${time_cmd}'  on $host  with pid = ${pid}" >> ${log_stderr}
+nohup bash -c "(time ${cmd} > ${log_stdout})" &> ${log_stderr} < /dev/null &
+
+ppppid=$$
+pppid=`pgrep -P ${ppppid} 2> /dev/null`
+ppid=`pgrep -P ${pppid} 2> /dev/null`
+pid=`pgrep -P ${ppid} 2> /dev/null`
+if [[ ! -z ${pid} ]] ; then
+  id=${pid}
+else
+  if [[ ! -z ${ppid} ]] ; then
+    id=${ppid}
+  else
+    if [[ ! -z ${pppid} ]] ; then
+      id=${pppid}
+    else
+      if [[ ! -z ${ppppid} ]] ; then
+        id=${ppppid}
+      else
+        echo "can't find pid"
+      fi
+    fi
+  fi
+fi
+echo "run  '${cmd}'  on $host  with pid = ${id}" >> ${log_stderr}
 echo "" >> ${log_stderr}
-
-# ps -o pid,ppid | sed -n '/14379/p'
