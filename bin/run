@@ -25,7 +25,7 @@ fi
 log_stdout=${log_str}.out
 log_stderr=${log_str}.err
 
-nohup bash -c "(time ${cmd} > ${log_stdout})" &> ${log_stderr} < /dev/null &
+nohup bash -c "(time ${cmd} > ${log_stdout})" &>> ${log_stderr} < /dev/null &
 
 ppppid="$$"
 pppid=`pgrep -P ${ppppid} | head -n1 |awk '{print $1}' 2> /dev/null`
