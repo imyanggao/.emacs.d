@@ -18,6 +18,10 @@ done
 
 log_str=${cmd_str}_${cur_date}
 
+if [[ ${cmd_str} =~ "th_exp" ]] ; then
+  cmd=${cmd}" -l "${log_str}".log"
+fi
+
 log_stdout=${log_str}.out
 log_stderr=${log_str}.err
 
