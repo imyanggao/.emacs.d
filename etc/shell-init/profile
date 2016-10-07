@@ -10,5 +10,6 @@ if [ -n "$BASH_VERSION" ]; then
   if [ -f "$HOME/.bashrc2" ] ; then
     source "$HOME/.bashrc2"
   fi
-fi
 
+  test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+fi
