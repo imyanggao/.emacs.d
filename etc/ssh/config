@@ -39,4 +39,18 @@ Host beast
   HostName  beast.sci.utah.edu
   User      gao
 
+Host lakota
+  HostName  lakota.sci.utah.edu
+  User      gao
+
+Host cleopatra
+  HostName  cleopatra.sci.utah.edu
+  User      gao
+
+Host uv
+  HostName  uv.sci.utah.edu
+  User      gao
+
+  
+
   
