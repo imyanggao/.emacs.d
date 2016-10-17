@@ -89,6 +89,7 @@ elif [[ ${OS} == Linux ]] ; then
     if [[ ${HOSTNAME} == snake06 ]]; then
       LOCAL=snake06
       LUASTR=qlua
+      ulimit -n 4096
     fi
     if [[ ${HOSTNAME} == snake08 ]]; then
       LOCAL=snake08
