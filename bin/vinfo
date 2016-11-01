@@ -1,0 +1,37 @@
+#!/bin/bash
+
+dependence=(ffmpeg ffprobe)
+for i in ${dependence[@]};do
+  command -v ${i} >/dev/null 2>&1 || { echo >&2 "require ${i} but it's not installed. Aborting."; exit 1; }
+done
+
+for arg in "$@"
+do
+  if [ -f "${arg}" ] ; then
+    echo "${arg}:"
+    nstreams=$(ffprobe -v error -show_streams ${arg} | grep 'codec_type=video' | wc -l)
+    echo "nstreams:  ${nstreams}"
+    for (( i=0; i<${nstreams}; i=i+1 )); do
+      echo "[stream ${i}]"
+      common="ffprobe -v error -of default=nw=1:nk=1 -select_streams v:${i} -show_entries"
+      nframes=$(eval ${common}" stream=nb_read_frames -count_frames  "${arg})
+      if [ ${nframes} == "N/A" ] ; then
+        mkdir tmp1234
+        ffmpeg -v error -i ${arg}  tmp1234/%d.png
+        nframes=$(ls tmp1234/*.png | wc -l)
+        rm -rf tmp1234
+      fi
+      fps=$(eval ${common}" stream=avg_frame_rate "${arg})
+      duration=$(eval ${common}" stream=duration -sexagesimal "${arg})
+      height=$(eval ${common}" stream=height "${arg})
+      width=$(eval ${common}" stream=width "${arg})
+      printf "  %-24s %s\n" "duration (hh:mm:ss.ms):" ${duration}
+      printf "  %-24s %s\n" "fps:" ${fps}
+      printf "  %-24s %s\n" "nframes:" ${nframes}
+      printf "  %-24s %s\n" "width x height:" ${width}x${height}
+    done
+  else
+    echo "${arg} doesn't exist"
+    exit 1
+  fi
+done
