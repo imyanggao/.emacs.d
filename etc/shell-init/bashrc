@@ -111,6 +111,10 @@ elif [[ ${OS} == Linux ]] ; then
     ADD_LIB_PATH=/usr/local/cuda-7.0/lib64:${ADD_LIB_PATH}
   elif [[ ${HOSTNAME} == tj ]] ; then
     LOCAL=gcc5.4
+    ADD_PATH=${HOME}/Applications/bin:${ADD_PATH}
+    for d in ${HOME}/Applications/pkg/*/bin; do
+      ADD_PATH=${d}:${ADD_PATH}
+    done
   fi
 fi
 ADD_PATH=${HOME}/.emacs.d/bin:${ADD_PATH}
