@@ -43,8 +43,7 @@ alias lla='ll -a'
 alias lt='ls -ltr'
 
 # grep
-export GREP_OPTIONS='--color=auto'
-alias grep='grep -n'
+alias grep='grep -n --color=auto'
 
 
 # For linux, link data directory brute force
@@ -237,6 +236,8 @@ function lk() {
 }
   
 lk $LOCAL
+export LOCAL=${LOCAL}
+export LOCALDIR=${LOCALDIR}
 
 if [[ ! `command -v Emacs` ]] ; then
     if [[ `command -v emacs` ]] ; then
