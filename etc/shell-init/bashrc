@@ -219,13 +219,13 @@ function lk() {
     fi
     
     # torch environment
-    if [[ -e ${LOCALDIR}/torch7/install/bin/torch-activate ]]; then
-      . ${LOCALDIR}/torch7/install/bin/torch-activate
+    if [[ -e ${LOCALDIR}/torch/install/bin/torch-activate ]]; then
+      . ${LOCALDIR}/torch/install/bin/torch-activate
     fi
     if [[ -L ${BINDIR}/lua ]]; then
         rm ${BINDIR}/lua
     fi
-    ln -s ${LOCALDIR}/torch7/install/bin/${LUASTR} ${BINDIR}/lua
+    ln -s ${LOCALDIR}/torch/install/bin/${LUASTR} ${BINDIR}/lua
     
 
     # if mac, try to set corresponding compiler
