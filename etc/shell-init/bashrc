@@ -110,6 +110,8 @@ elif [[ ${OS} == Linux ]] ; then
     LOCAL=kepler
     ADD_PATH=/usr/local/cuda-7.0/bin:${ADD_PATH}
     ADD_LIB_PATH=/usr/local/cuda-7.0/lib64:${ADD_LIB_PATH}
+  elif [[ ${HOSTNAME} == tj ]] ; then
+    LOCAL=gcc5.4
   fi
 fi
 ADD_PATH=${HOME}/.emacs.d/bin:${ADD_PATH}
