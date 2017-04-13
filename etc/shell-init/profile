@@ -7,9 +7,9 @@ if [ -n "$BASH_VERSION" ]; then
   # for 2nd step init which depends on corrent path
   # Linux init seq: ~/.bashrc -> ~/.profile
   # MacOS init seq: ~/.profile -> ~/.bashrc
-  if [ -f "$HOME/.bashrc2" ] ; then
-    source "$HOME/.bashrc2"
-  fi
+  #if [ -f "$HOME/.bashrc2" ] ; then
+  #  source "$HOME/.bashrc2"
+  #fi
 
   test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 fi
