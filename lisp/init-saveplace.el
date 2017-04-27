@@ -1,7 +1,10 @@
 (message "init-saveplace.el")
 
-(require 'saveplace)
-(setq-default save-place t)
+(if (version< emacs-version "25.1")
+    ((require 'saveplace)
+     (setq-default save-place t))
+  (save-place-mode 1))
+
 (setq save-place-file (expand-file-name "backups/saved-places" user-emacs-directory))
 (setq save-place-forget-unreadable-files nil)
 
