@@ -1,0 +1,15 @@
+
+Flatabulous:
+https://github.com/anmoljagetia/Flatabulous
+
+System Load Indicator:
+https://launchpad.net/indicator-multiload
+sudo apt install indicator-multiload
+
+Terminator:
+use Liberation Mono 10
+sudo apt-get install ttf-liberation
+
+Bluetooth:
+- make A2DP default mode in sound by installing blueman:
+sudo apt install blueman
