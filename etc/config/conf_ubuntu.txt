@@ -2,6 +2,18 @@
 Flatabulous:
 https://github.com/anmoljagetia/Flatabulous
 
+Unity Tweak Tool:
+- change "show the launcher" shorcut with <super>+space in Unity->Additional
+- change "start windows spread" shortcut with <super>+1 in Window Manager->Window Spread
+
+Ubuntu Tweak:
+- open natural scrolling in Miscellaneous
+
+Autokey:
+sudo apt install autokey-gtk
+Do NOT open AutoKey GUI. Link script first:
+ln -s ~/.emacs.d/etc/autokey/scripts ~/.config/autokey/data/scripts
+
 System Load Indicator:
 https://launchpad.net/indicator-multiload
 sudo apt install indicator-multiload
