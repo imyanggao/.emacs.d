@@ -1,18 +1,48 @@
 
+NVidia driver:
+- Open Software & Updates->Additional Drivers: select nvidia driver, then apply changes
+- Intel firmware could also be installed
+
+Emacs:
+http://ftp.gnu.org/gnu/emacs/
+- Open Software & Updates and enable "Source code"
+sudo apt install build-essential checkinstall
+sudo apt-get build-dep emacs24
+cd ~/Downloads/emacs
+./configure
+make
+sudo checkinstall (to create .deb and install, need to answer on screen questions. remove by: sudo dpkg -r emacs-25)
+
 Flatabulous:
 https://github.com/anmoljagetia/Flatabulous
+sudo apt install unity-tweak-tool
+wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
+sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu xenial-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list'
+sudo apt update
+sudo apt install ubuntu-tweak
+sudo add-apt-repository ppa:noobslab/icons
+sudo apt update
+sudo apt install ultra-flat-icons
 
 Unity Tweak Tool:
 - change "show the launcher" shorcut with <super>+space in Unity->Additional
 - change "start windows spread" shortcut with <super>+1 in Window Manager->Window Spread
+- open "auto-hide" for hidding side bar in ubuntu desktop in Unity->Launcher
+
+System Settings:
+- always show the menu with open "always displayed" in Appearance->Behavior->Menus visibility
 
 Ubuntu Tweak:
 - open natural scrolling in Miscellaneous
 
-Autokey:
+Autokey: (DO NOT USE THIS TOOL!!!!!!!!!!! CRASHED!!!!!!!!!!!)
 sudo apt install autokey-gtk
 Do NOT open AutoKey GUI. Link script first:
 ln -s ~/.emacs.d/etc/autokey/scripts ~/.config/autokey/data/scripts
+
+Gnome-tweak-tool: (Use this)
+sudo apt install gnome-tweak-tool
+then go to keyboard and mouse and change key theme to emacs
 
 System Load Indicator:
 https://launchpad.net/indicator-multiload
@@ -20,10 +50,39 @@ sudo apt install indicator-multiload
 
 Terminator:
 use Liberation Mono 10
-sudo apt-get install ttf-liberation
+sudo apt install ttf-liberation
+sudo apt install terminator
 Link config file:
 ln -s ~/.emacs.d/etc/terminator/config ~/.config/terminator/config
 
 Bluetooth:
 - make A2DP default mode in sound by installing blueman:
 sudo apt install blueman
+
+Sogou:
+sudo apt install fcitx
+go to language support and check the entry Keyboard input method system. It should now say fcitx.
+download deb from official website and install
+In setting on the top bar, uncheck "only show current language" and add sogou pinyin
+
+ccmake:
+sudo apt install cmake-curses-gui
+
+swig:
+sudo apt install swig
+
+python2.7-dev:
+sudo apt install libpython2.7-dev
+
+boost:
+sudo apt install libboost-all-dev
+
+python-numpy:
+sudo apt install python-numpy
+
+armadillo:
+sudo apt install libarmadillo6
+sudo apt install libarmadillo-dev
+
+latex:
+sudo apt install texlive-full

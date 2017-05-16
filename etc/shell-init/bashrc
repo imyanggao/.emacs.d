@@ -75,7 +75,7 @@ ADD_LIB_PATH=""
 # OS dependent and local directory
 if [[ ${OS} == Mac ]]; then
   QTSTR=-
-  LOCAL=clang
+  LOCAL=-clang
   # ADD_PATH=${HOME}/.emacs.d/macbin:${ADD_PATH}
   ADD_PATH=/Developer/NVIDIA/CUDA-7.5/bin:${HOME}/.emacs.d/macbin:${ADD_PATH}
   # ADD_LIB_PATH=/Developer/NVIDIA/CUDA-7.5/lib:/usr/local/opt/openblas/lib:${ADD_LIB_PATH}
@@ -83,35 +83,35 @@ if [[ ${OS} == Mac ]]; then
 elif [[ ${OS} == Linux ]] ; then
   QTSTR=Qt-4.8.6
   if [[ ${HOSTNAME} == ml* ]]; then
-    LOCAL=ml74
+    LOCAL=-ml74
     LUASTR=qlua
   elif [[ ${HOSTNAME} == snake* ]]; then
     if [[ ${HOSTNAME} == snake06 ]]; then
-      LOCAL=snake06
+      LOCAL=-snake06
       LUASTR=qlua
       ulimit -n 4096
     fi
     if [[ ${HOSTNAME} == snake08 ]]; then
-      LOCAL=snake08
+      LOCAL=-snake08
       LUASTR=qlua
     fi
     ADD_PATH=/usr/local/cuda/bin:${HOME}/local-snake08/install/meld-3.12.3/bin:${ADD_PATH}
     ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
   elif [[ ${HOSTNAME} == beast ]]; then
-    LOCAL=beast
+    LOCAL=-beast
     ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
     ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
   elif [[ ${HOSTNAME} == mcp.sci.utah.edu ]] || [[ ${HOSTNAME} == tesla* ]] ; then
-    LOCAL=tesla
+    LOCAL=-tesla
     ADD_PATH=/usr/local/cuda/bin:${ADD_PATH}
     ADD_LIB_PATH=/usr/local/cuda/lib64:${ADD_LIB_PATH}
   elif [[ ${HOSTNAME} == wopr1.sci.utah.edu ]] || [[ ${HOSTNAME} == kepler* ]] ; then
-    LOCAL=kepler
+    LOCAL=-kepler
     ADD_PATH=/usr/local/cuda-7.0/bin:${ADD_PATH}
     ADD_LIB_PATH=/usr/local/cuda-7.0/lib64:${ADD_LIB_PATH}
   elif [[ ${HOSTNAME} == tj ]] ; then
-    LOCAL=gcc5.4
-    ADD_PATH=${HOME}/Applications/bin:${ADD_PATH}
+    LOCAL=""
+    ADD_PATH=${HOME}/Applications/bin:/usr/local/cuda/bin:${ADD_PATH}
     for d in ${HOME}/Applications/pkg/*/bin; do
       ADD_PATH=${d}:${ADD_PATH}
     done
@@ -138,9 +138,9 @@ fi
 function lk() {
     # define local dir used for all following
     if [[ ! ${1} ]]; then
-      LOCALDIR=${HOME}/local-${LOCAL}
+      LOCALDIR=${HOME}/local${LOCAL}
     else
-      LOCALDIR=${HOME}/local-${1}
+      LOCALDIR=${HOME}/local${1}
     fi
     
     # check existence
@@ -160,7 +160,9 @@ function lk() {
       if [[ -L ${HOME}/local ]]; then
         rm ${HOME}/local
       fi
-      ln -s ${LOCALDIR} ${HOME}/local
+      if [[ ${LOCALDIR} != ${HOME}/local ]]; then
+        ln -s ${LOCALDIR} ${HOME}/local
+      fi
     fi
     
     BINDIR=${LOCALDIR}/bin
@@ -228,7 +230,7 @@ function lk() {
     if [[ -L ${BINDIR}/lua ]]; then
         rm ${BINDIR}/lua
     fi
-    ln -s ${LOCALDIR}/torch/install/bin/${LUASTR} ${BINDIR}/lua
+    #ln -s ${LOCALDIR}/torch/install/bin/${LUASTR} ${BINDIR}/lua
     
 
     # if mac, try to set corresponding compiler
