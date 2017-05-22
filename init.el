@@ -21,6 +21,7 @@
 (require 'init-nlinum)                  ; nlinum
 (require 'init-comment-dwim-2)          ; enhanced comment
 (require 'init-saveplace)               ; save place for reopen at same position
+(require 'init-spell-check)             ; spelling check
 (require 'init-yasnippet)               ; yasnippet
 (require 'init-auto-complete)           ; auto-complete
 (require 'init-projectile)              ; projectile

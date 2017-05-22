@@ -64,6 +64,7 @@ sudo apt install fcitx
 go to language support and check the entry Keyboard input method system. It should now say fcitx.
 download deb from official website and install
 In setting on the top bar, uncheck "only show current language" and add sogou pinyin
+Close clipboard history list trigger(ctrl+;) by: open Fcitx Configuration->AddOn->Clipboard, click Advance, then uncheck Clipboard.
 
 ccmake:
 sudo apt install cmake-curses-gui
@@ -86,3 +87,6 @@ sudo apt install libarmadillo-dev
 
 latex:
 sudo apt install texlive-full
+
+hunspell:
+sudo apt install hunspell
