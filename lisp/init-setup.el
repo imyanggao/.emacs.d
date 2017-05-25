@@ -1,15 +1,5 @@
 (message "init-setup.el")
 
-;; custom key bindings
-(global-set-key (kbd "M-m") 'set-mark-command)
-(global-set-key (kbd "C-q") 'query-replace)
-(global-set-key (kbd "C-j") 'goto-line)
-(global-set-key (kbd "C-o") 'other-window)
-(global-set-key (kbd "M-1") 'delete-other-windows)
-(global-set-key (kbd "M-2") 'split-window-below)
-(global-set-key (kbd "M-3") 'split-window-right)
-(global-set-key (kbd "M-0") 'delete-window)
-
 ;; highlight matching brackets
 (setq show-paren-delay 0)
 (show-paren-mode 1)

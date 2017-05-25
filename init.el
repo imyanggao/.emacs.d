@@ -33,6 +33,7 @@
 (require 'init-auctex)                  ; auctex
 (require 'init-setup)                   ; preferences
 (require 'init-osdep)                   ; os dependent features
+(require 'init-key-bindings)            ; key bindings
 
 (provide 'init)
 (custom-set-variables

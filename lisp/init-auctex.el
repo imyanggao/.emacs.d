@@ -19,8 +19,7 @@
                   TeX-PDF-mode t          ; pdf mode is enabled by default for output pdf directly
                   TeX-source-correlate-mode t          ; enable forward and inverse search between tex and pdf
                   TeX-source-correlate-method 'synctex ; use synctex for search
-                  TeX-save-query nil)     ; avoid querying the user for automatically saving files
-            (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol))) ; tab key for symbol completion
+                  TeX-save-query nil)))     ; avoid querying the user for automatically saving files
 
 (defun demolish-tex-help ()
   (interactive)
