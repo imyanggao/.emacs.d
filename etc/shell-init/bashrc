@@ -75,7 +75,7 @@ ADD_LIB_PATH=""
 # OS dependent and local directory
 if [[ ${OS} == Mac ]]; then
   QTSTR=-
-  LOCAL=-clang
+  LOCAL=""
   # ADD_PATH=${HOME}/.emacs.d/macbin:${ADD_PATH}
   ADD_PATH=/Developer/NVIDIA/CUDA-7.5/bin:${HOME}/.emacs.d/macbin:${ADD_PATH}
   # ADD_LIB_PATH=/Developer/NVIDIA/CUDA-7.5/lib:/usr/local/opt/openblas/lib:${ADD_LIB_PATH}
@@ -235,11 +235,11 @@ function lk() {
     
 
     # if mac, try to set corresponding compiler
-    if [[ ${OS} == Mac ]]; then
-      CC=`which ${1}`
-      CXX=`which ${1}++`
-      echo -e "\033[32mBased on LOCAL=${1}, guess and set:\nCC=${CC}\nCXX=${CXX} \033[0m"
-    fi
+    #if [[ ${OS} == Mac ]]; then
+    #  CC=`which ${1}`
+    #  CXX=`which ${1}++`
+    #  echo -e "\033[32mBased on LOCAL=${1}, guess and set:\nCC=${CC}\nCXX=${CXX} \033[0m"
+    #fi
 }
   
 lk $LOCAL
