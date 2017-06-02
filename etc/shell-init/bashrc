@@ -115,6 +115,7 @@ elif [[ ${OS} == Linux ]] ; then
     for d in ${HOME}/Applications/pkg/*/bin; do
       ADD_PATH=${d}:${ADD_PATH}
     done
+    export MATLAB_ROOT=/usr/local/MATLAB/R2017a
   fi
 fi
 ADD_PATH=${HOME}/.emacs.d/bin:${ADD_PATH}
