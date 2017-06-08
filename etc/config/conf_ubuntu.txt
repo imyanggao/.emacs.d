@@ -85,6 +85,9 @@ armadillo:
 sudo apt install libarmadillo6
 sudo apt install libarmadillo-dev
 
+matio:
+sudo apt install libmatio2
+
 latex:
 sudo apt install texlive-full
 
