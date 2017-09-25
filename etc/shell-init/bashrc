@@ -80,6 +80,7 @@ if [[ ${OS} == Mac ]]; then
   ADD_PATH=/Developer/NVIDIA/CUDA-7.5/bin:${HOME}/.emacs.d/macbin:${ADD_PATH}
   # ADD_LIB_PATH=/Developer/NVIDIA/CUDA-7.5/lib:/usr/local/opt/openblas/lib:${ADD_LIB_PATH}
   # export HOMEBREW_GITHUB_API_TOKEN=06318a3d7fae4f26ec4f6081dfcf52e86a933cd6
+  export MATLAB_ROOT=/Applications/MATLAB_R2016b.app
 elif [[ ${OS} == Linux ]] ; then
   QTSTR=Qt-4.8.6
   if [[ ${HOSTNAME} == ml* ]]; then

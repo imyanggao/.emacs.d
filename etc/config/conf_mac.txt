@@ -1,0 +1,7 @@
+
+Sierra:
+install java:
+brew cask install java
+
+install matio:
+brew install homebrew/science/libmatio
