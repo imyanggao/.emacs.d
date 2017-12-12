@@ -3,13 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>build</key>
-	<real>636</real>
+	<real>912</real>
 	<key>license</key>
-	<string>1574-5977-7956-8062-0000</string>
+	<dict>
+		<key>email</key>
+		<string>yang.gao.cs@gmail.com</string>
+		<key>serial</key>
+		<string>GAXAE-F9A4N-DS2KM-728BW-P4Q2H-KFHSP-B6FX9-TVMWA-A9KQB-R3GS2-7ZGQH-C7HLZ-SYRVF-BYY57-Q7PC5-C4</string>
+	</dict>
 	<key>preferences</key>
 	<dict>
 		<key>Battery_MenubarMode</key>
-		<string>5</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>5</string>
+				<key>uuid</key>
+				<string>CF097D04-709B-4190-9485-05E6A5EB138F</string>
+			</dict>
+		</array>
 		<key>Battery_Notifications</key>
 		<array>
 			<dict>
@@ -24,15 +36,70 @@
 			</dict>
 		</array>
 		<key>CPU_MenubarMode</key>
-		<string>100,6</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>100</string>
+				<key>uuid</key>
+				<string>B7706A8D-B90B-4E4F-B3D5-FCE5D38FB983</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>6</string>
+				<key>uuid</key>
+				<string>452B4682-F0C1-42A5-BC8D-8E78D46234CE</string>
+			</dict>
+		</array>
 		<key>CombinedDropdownDisplayMode</key>
-		<string></string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string></string>
+				<key>uuid</key>
+				<string>6D6E3FCA-A2BE-4448-A40C-24261EE2C089</string>
+			</dict>
+		</array>
 		<key>CombinedMenubarDisplayMode</key>
-		<string></string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string></string>
+				<key>uuid</key>
+				<string>A248A547-9EA9-43B5-B34F-FD773C51CC30</string>
+			</dict>
+		</array>
 		<key>Diagnostics_Enabled</key>
 		<integer>0</integer>
+		<key>Disks_MenubarItems</key>
+		<array>
+			<dict>
+				<key>boot</key>
+				<true/>
+				<key>key</key>
+				<string>D619C273-095A-4152-86CA-CD0E5B5154AD</string>
+				<key>name</key>
+				<string>macOS</string>
+			</dict>
+		</array>
+		<key>Migrated_6.0</key>
+		<true/>
 		<key>Network_MenubarMode</key>
-		<string>5,0</string>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>5</string>
+				<key>uuid</key>
+				<string>BEA96DEF-0296-48D6-8090-93438F8E95B6</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>0</string>
+				<key>uuid</key>
+				<string>198612AA-7BAB-4DCA-8581-A63A89FF217B</string>
+			</dict>
+		</array>
+		<key>Sensors-Limits-Updated</key>
+		<true/>
 		<key>StatusItems-Order</key>
 		<array>
 			<integer>1</integer>
@@ -65,22 +132,29 @@
 		</array>
 		<key>Time_MenubarFormat</key>
 		<array>
-			<string>EE</string>
-			<string>' '</string>
-			<string>hh</string>
-			<string>':'</string>
-			<string>mm</string>
-			<string>' '</string>
-			<string>a</string>
-			<string>', '</string>
-			<string>MMM</string>
-			<string>' '</string>
-			<string>d</string>
-			<string>', '</string>
-			<string>yyyy</string>
+			<dict>
+				<key>format</key>
+				<array>
+					<array>
+						<string>EE</string>
+						<string>' '</string>
+						<string>hh</string>
+						<string>':'</string>
+						<string>mm</string>
+						<string>' '</string>
+						<string>a</string>
+						<string>', '</string>
+						<string>MMM</string>
+						<string>' '</string>
+						<string>d</string>
+						<string>', '</string>
+						<string>yyyy</string>
+					</array>
+				</array>
+			</dict>
 		</array>
 	</dict>
 	<key>version</key>
-	<real>5.1100001335144043</real>
+	<real>6</real>
 </dict>
 </plist>
