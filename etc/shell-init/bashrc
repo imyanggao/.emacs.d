@@ -116,6 +116,8 @@ elif [[ ${OS} == Linux ]] ; then
     for d in ${HOME}/Applications/pkg/*/bin; do
       ADD_PATH=${d}:${ADD_PATH}
     done
+    export LD_LIBRARY_PATH=${HOME}/local/install/cudnn-v5:$LD_LIBRARY_PATH
+    export CUDNN_PATH=${HOME}/local/install/cudnn-v5/lib64/libcudnn.so.5
     export MATLAB_ROOT=/usr/local/MATLAB/R2017a
   fi
 fi

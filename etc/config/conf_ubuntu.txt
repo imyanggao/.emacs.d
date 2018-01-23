@@ -13,6 +13,11 @@ cd ~/Downloads/emacs
 make
 sudo checkinstall (to create .deb and install, need to answer on screen questions. remove by: sudo dpkg -r emacs-25)
 
+Emacs(easier way):
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs25
+
 Flatabulous:
 https://github.com/anmoljagetia/Flatabulous
 sudo apt install unity-tweak-tool
@@ -23,6 +28,23 @@ sudo apt install ubuntu-tweak
 sudo add-apt-repository ppa:noobslab/icons
 sudo apt update
 sudo apt install ultra-flat-icons
+
+Macbuntu (http://www.linuxandubuntu.com/home/macbuntu-transform-ubuntu-1604-to-mac-os-x):
+sudo apt install unity-tweak-tool
+sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt update
+sudo apt install macbuntu-os-icons-lts-v7
+sudo apt install macbuntu-os-ithemes-lts-v7
+- open "Unity Tweak Tool" and set theme and icon both to "Macbuntu-os"
+- for Launchpad (not so good):
+sudo apt install slingscold
+- for Spotlight (not so good):
+sudo apt install albert
+- install apple macos font (not so good):
+wget -O mac-fonts.zip http://drive.noobslab.com/data/Mac/macfonts.zip
+sudo unzip mac-fonts.zip -d /usr/share/fonts; rm mac-fonts.zip
+sudo fc-cache -f -v
+- then open "Unity Tweak Tool" and set fonts.
 
 Unity Tweak Tool:
 - change "show the launcher" shorcut with <super>+space in Unity->Additional
@@ -53,7 +75,7 @@ use Liberation Mono 10
 sudo apt install ttf-liberation
 sudo apt install terminator
 Link config file:
-ln -s ~/.emacs.d/etc/terminator/config ~/.config/terminator/config
+ln -s ~/.emacs.d/etc/terminator ~/.config/terminator
 
 Bluetooth:
 - make A2DP default mode in sound by installing blueman:
@@ -99,3 +121,6 @@ sudo apt install jabref
 
 unrar:
 sudo apt install unrar
+
+meld:
+sudo apt install meld
