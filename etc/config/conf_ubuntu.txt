@@ -1,5 +1,13 @@
+Mount disks:
+sudo mkdir /mnt/ssd500
+sudo mkdir /mnt/ssd250
+check UUID:
+lsblk -o NAME,FSTYPE,UUID
+edit /etc/fstab and add the similar 2 lines with tab seperator:
+UUID=cbe9c63f-2bd2-4e3d-8f2c-9d2a54b323c3   /mnt/ssd500 ext4  defaults  0 2
+UUID=6f4bd7e2-e139-4ba6-a611-a1fe18f83dc0   /mnt/ssd250 ext4  defaults  0 2
 
-NVidia driver:
+NVidia driver (don't do this with xeon cpu, 3 gpus and x99 motherboard):
 - Open Software & Updates->Additional Drivers: select nvidia driver, then apply changes
 - Intel firmware could also be installed
 
@@ -52,7 +60,7 @@ Unity Tweak Tool:
 - open "auto-hide" for hidding side bar in ubuntu desktop in Unity->Launcher
 
 System Settings:
-- always show the menu with open "always displayed" in Appearance->Behavior->Menus visibility
+- always show the menu with open "In the window's title bar" and "always displayed" in Appearance->Behavior->Menus visibility
 
 Ubuntu Tweak:
 - open natural scrolling in Miscellaneous

@@ -1,9 +1,6 @@
 [global_config]
 [keybindings]
-  copy = <Super>c
-  new_tab = <Super>t
-  new_window = <Super>n
-  paste = <Super>v
+  new_terminator = <Alt>n
 [layouts]
   [[default]]
     [[[child1]]]
@@ -16,7 +13,6 @@
 [profiles]
   [[default]]
     background_image = None
-    font = Liberation Mono 12
-    scrollback_lines = 5000
-    show_titlebar = False
+    font = Monospace 12
+    scrollback_infinite = True
     use_system_font = False
