@@ -7,35 +7,34 @@
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
 
-;; Global Keymaps
-
-;; custom key bindings
-(global-set-key (kbd "M-z") 'undo)
-(global-set-key (kbd "M-m") 'set-mark-command)
-(global-set-key (kbd "C-q") 'query-replace)
-(global-set-key (kbd "C-j") 'goto-line)
-(global-set-key (kbd "C-o") 'other-window)
-(global-set-key (kbd "M-1") 'delete-other-windows)
-(global-set-key (kbd "M-2") 'split-window-below)
-(global-set-key (kbd "M-3") 'split-window-right)
-(global-set-key (kbd "M-0") 'delete-window)
-(global-set-key (kbd "M-\\") 'indent-whole-buffer)
-;; comment-dwim-2
-(global-set-key (kbd "M-;") 'comment-dwim-2)
-;; helm
-(global-set-key (kbd "M-x")      'helm-M-x)
-(global-set-key (kbd "M-y")      'helm-show-kill-ring)
-(global-set-key (kbd "C-c h")    'helm-command-prefix)
-(global-set-key (kbd "C-x b")    'helm-mini)
-(global-set-key (kbd "C-x C-f")  'helm-find-files)
-(global-set-key (kbd "C-h SPC")  'helm-all-mark-rings)
-(global-set-key (kbd "C-r")      'helm-do-grep-ag)
-;; helm-swoop
-(global-set-key (kbd "C-s") 'helm-swoop)
-;; helm-projectile
-(global-set-key (kbd "C-c p h") 'helm-projectile)  ; Helm interface to projectile
-;; magit
-(global-set-key (kbd "C-c g") 'magit-status)
+;; ;; Global Keymaps (old implementation, not unify over all modes)
+;; ;; custom key bindings
+;; (global-set-key (kbd "M-z") 'undo)
+;; (global-set-key (kbd "M-m") 'set-mark-command)
+;; (global-set-key (kbd "C-q") 'query-replace)
+;; (global-set-key (kbd "C-j") 'goto-line)
+;; (global-set-key (kbd "C-o") 'other-window)
+;; (global-set-key (kbd "M-1") 'delete-other-windows)
+;; (global-set-key (kbd "M-2") 'split-window-below)
+;; (global-set-key (kbd "M-3") 'split-window-right)
+;; (global-set-key (kbd "M-0") 'delete-window)
+;; (global-set-key (kbd "M-\\") 'indent-whole-buffer)
+;; ;; comment-dwim-2
+;; (global-set-key (kbd "M-;") 'comment-dwim-2)
+;; ;; helm
+;; (global-set-key (kbd "M-x")      'helm-M-x)
+;; (global-set-key (kbd "M-y")      'helm-show-kill-ring)
+;; (global-set-key (kbd "C-c h")    'helm-command-prefix)
+;; (global-set-key (kbd "C-x b")    'helm-mini)
+;; (global-set-key (kbd "C-x C-f")  'helm-find-files)
+;; (global-set-key (kbd "C-h SPC")  'helm-all-mark-rings)
+;; (global-set-key (kbd "C-r")      'helm-do-grep-ag)
+;; ;; helm-swoop
+;; (global-set-key (kbd "C-s") 'helm-swoop)
+;; ;; helm-projectile
+;; (global-set-key (kbd "C-c p h") 'helm-projectile)  ; Helm interface to projectile
+;; ;; magit
+;; (global-set-key (kbd "C-c g") 'magit-status)
 
 ;; Local Keymaps
 
@@ -67,5 +66,54 @@
             (define-key yas-minor-mode-map (kbd "<tab>") nil)
             (define-key yas-minor-mode-map (kbd "TAB") nil)
             (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand))) ;to avoid <tab> conflict with auto-complete, use C-c k for trigger
+
+;; Global Keymaps
+;; achieved by using minor mode to unify the global keymap
+;; this minor mode should be first on the list minor-mode-map-alist
+;; usually put the following pieces near the end of emacs config
+
+(defvar global-keybindings-minor-mode-map
+  (let ((map (make-sparse-keymap)))
+    ;; custom key bindings
+    (define-key map (kbd "M-z") 'undo)
+    (define-key map (kbd "M-m") 'set-mark-command)
+    (define-key map (kbd "C-q") 'query-replace)
+    (define-key map (kbd "C-j") 'goto-line)
+    (define-key map (kbd "C-o") 'other-window)
+    (define-key map (kbd "M-1") 'delete-other-windows)
+    (define-key map (kbd "M-2") 'split-window-below)
+    (define-key map (kbd "M-3") 'split-window-right)
+    (define-key map (kbd "M-0") 'delete-window)
+    (define-key map (kbd "M-\\") 'indent-whole-buffer)
+    ;; comment-dwim-2
+    (define-key map (kbd "M-;") 'comment-dwim-2)
+    ;; helm
+    (define-key map (kbd "M-x") 'helm-M-x)
+    (define-key map (kbd "M-y") 'helm-show-kill-ring)
+    (define-key map (kbd "C-c h") 'helm-command-prefix)
+    (define-key map (kbd "C-x b") 'helm-mini)
+    (define-key map (kbd "C-x C-f") 'helm-find-files)
+    (define-key map (kbd "C-h SPC") 'helm-all-mark-rings)
+    (define-key map (kbd "C-r") 'helm-do-grep-ag)
+    ;; helm-swoop
+    (define-key map (kbd "C-s") 'helm-swoop)
+    ;; helm-projectile (Helm interface to projectile)
+    (define-key map (kbd "C-c p h") 'helm-projectile)
+    ;; magit
+    (define-key map (kbd "C-c g") 'magit-status)
+    map)
+  "global-keybindings-minor-mode keymap")
+
+(define-minor-mode global-keybindings-minor-mode
+  "a minor mode so that my global keymap could be unified over all modes"
+  :init-value t
+  :lighter " global-keybindings")
+
+(global-keybindings-minor-mode 1)
+
+(defun global-keybindings-minibuffer-setup-hook ()
+  (global-keybindings-minor-mode 0))
+
+(add-hook 'minibuffer-setup-hook 'global-keybindings-minibuffer-setup-hook)
 
 (provide 'init-key-bindings)

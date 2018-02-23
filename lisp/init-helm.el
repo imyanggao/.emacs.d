@@ -25,6 +25,12 @@
 ;; split window inside the current window
 (setq helm-swoop-split-with-multiple-windows t)
 
+;; use patch to fix problem: symbol's value as variable is void helm-swoop-pattern
+;; as suggestion here: https://github.com/ShingoFukuyama/helm-swoop/issues/126
+(defadvice helm-swoop (around helm-swoop-no-full-frame activate)
+  (let ((helm-full-frame nil))
+    ad-do-it))
+
 ;; use helm-projectile
 (require-package 'helm-projectile)
 (helm-projectile-on)
