@@ -1,3 +1,22 @@
+System Setting->Details->Install Updates
+
+Reboot
+
+Any deb package install with:
+sudo dpkg -i debname
+
+Anytime with dependence problem:
+sudo apt -f install
+
+Chrome:
+Download from the website
+install with deb package install method and dependence fix
+
+Emacs(easier way):
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs25
+
 Mount disks:
 sudo mkdir /mnt/ssd500
 sudo mkdir /mnt/ssd250
@@ -6,6 +25,107 @@ lsblk -o NAME,FSTYPE,UUID
 edit /etc/fstab and add the similar 2 lines with tab seperator:
 UUID=cbe9c63f-2bd2-4e3d-8f2c-9d2a54b323c3   /mnt/ssd500 ext4  defaults  0 2
 UUID=6f4bd7e2-e139-4ba6-a611-a1fe18f83dc0   /mnt/ssd250 ext4  defaults  0 2
+
+Reboot
+ln -s /mnt/ssd500/data /home/ygao/local/data
+
+Sogou:
+sudo apt install fcitx
+go to language support and check the entry Keyboard input method system. It should now say fcitx.
+reboot
+download deb from official website and install
+reboot
+(optional: In setting on the top bar, uncheck "only show current language" and add sogou pinyin
+Close clipboard history list trigger(ctrl+;) by: open Fcitx Configuration->AddOn->Clipboard, click Advance, then uncheck Clipboard.)
+
+Terminator:
+(optional: use Liberation Mono 10
+sudo apt install ttf-liberation)
+sudo apt install terminator
+Link config file:
+ln -s ~/.emacs.d/etc/terminator ~/.config/terminator
+
+System Load Indicator:
+https://launchpad.net/indicator-multiload
+sudo apt install indicator-multiload
+use arrow symbol for network speed:
+https://en.wikipedia.org/wiki/Arrow_(symbol)
+
+Cuda (NVidia driver included)
+download from:
+https://developer.nvidia.com/cuda-80-ga2-download-archive
+sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+sudo apt-get update
+sudo apt-get install cuda
+sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64.deb
+sudo apt-get update
+
+reboot and setup System Settings->Displays
+
+Cudnn (cudnn-8.0-linux-x64-v5.1.tgz)
+download from:
+https://developer.nvidia.com/rdp/cudnn-download
+mv ~/Download/cudnn-8.0-linux-x64-v5.1.tgz ~/local/install
+cd ~/local/install
+tar vxzf cudnn-8.0-linux-x64-v5.1.tgz
+mv cuda cudnn-v5.1
+ln -s /home/ygao/local/install/cudnn-v5.1 /home/ygao/local/cudnn
+
+Unity Tweak Tool:
+sudo apt install unity-tweak-tool
+- change "show the launcher" shorcut with <super>+space in Unity->Additional
+- In Launcher->Appearance->Position, change left to bottom
+(- change "start windows spread" shortcut with <super>+1 in Window Manager->Window Spread)
+(- open "auto-hide" for hidding side bar in ubuntu desktop in Unity->Launcher)
+
+System Settings->Appearance->Behavior:
+- always show the menu with open "In the window's title bar" and "always displayed" in Appearance->Behavior->Menus visibility
+
+(Ubuntu Tweak:
+- open natural scrolling in Miscellaneous)
+
+Gnome-tweak-tool: (Use this for HHKB)
+sudo apt install gnome-tweak-tool
+then go to keyboard and mouse and change key theme to emacs
+
+ccmake:
+sudo apt install cmake-curses-gui
+
+meld:
+sudo apt install meld
+
+latex:
+sudo apt install texlive-full
+
+hunspell:
+sudo apt install hunspell
+
+unrar:
+sudo apt install unrar
+
+jabref (Download latest version intead of this old one):
+sudo apt install jabref
+
+matio:
+sudo apt install libmatio2
+
+swig:
+sudo apt install swig
+
+python2.7-dev:
+sudo apt install libpython2.7-dev
+
+boost:
+sudo apt install libboost-all-dev
+
+python-numpy:
+sudo apt install python-numpy
+
+armadillo:
+sudo apt install libarmadillo6
+sudo apt install libarmadillo-dev
+
+---------------------------------------------------------------
 
 NVidia driver (don't do this with xeon cpu, 3 gpus and x99 motherboard):
 - Open Software & Updates->Additional Drivers: select nvidia driver, then apply changes
@@ -20,11 +140,6 @@ cd ~/Downloads/emacs
 ./configure
 make
 sudo checkinstall (to create .deb and install, need to answer on screen questions. remove by: sudo dpkg -r emacs-25)
-
-Emacs(easier way):
-sudo add-apt-repository ppa:kelleyk/emacs
-sudo apt update
-sudo apt install emacs25
 
 Flatabulous:
 https://github.com/anmoljagetia/Flatabulous
@@ -54,81 +169,11 @@ sudo unzip mac-fonts.zip -d /usr/share/fonts; rm mac-fonts.zip
 sudo fc-cache -f -v
 - then open "Unity Tweak Tool" and set fonts.
 
-Unity Tweak Tool:
-- change "show the launcher" shorcut with <super>+space in Unity->Additional
-- change "start windows spread" shortcut with <super>+1 in Window Manager->Window Spread
-- open "auto-hide" for hidding side bar in ubuntu desktop in Unity->Launcher
-
-System Settings:
-- always show the menu with open "In the window's title bar" and "always displayed" in Appearance->Behavior->Menus visibility
-
-Ubuntu Tweak:
-- open natural scrolling in Miscellaneous
-
 Autokey: (DO NOT USE THIS TOOL!!!!!!!!!!! CRASHED!!!!!!!!!!!)
 sudo apt install autokey-gtk
 Do NOT open AutoKey GUI. Link script first:
 ln -s ~/.emacs.d/etc/autokey/scripts ~/.config/autokey/data/scripts
 
-Gnome-tweak-tool: (Use this)
-sudo apt install gnome-tweak-tool
-then go to keyboard and mouse and change key theme to emacs
-
-System Load Indicator:
-https://launchpad.net/indicator-multiload
-sudo apt install indicator-multiload
-
-Terminator:
-use Liberation Mono 10
-sudo apt install ttf-liberation
-sudo apt install terminator
-Link config file:
-ln -s ~/.emacs.d/etc/terminator ~/.config/terminator
-
 Bluetooth:
 - make A2DP default mode in sound by installing blueman:
 sudo apt install blueman
-
-Sogou:
-sudo apt install fcitx
-go to language support and check the entry Keyboard input method system. It should now say fcitx.
-download deb from official website and install
-In setting on the top bar, uncheck "only show current language" and add sogou pinyin
-Close clipboard history list trigger(ctrl+;) by: open Fcitx Configuration->AddOn->Clipboard, click Advance, then uncheck Clipboard.
-
-ccmake:
-sudo apt install cmake-curses-gui
-
-swig:
-sudo apt install swig
-
-python2.7-dev:
-sudo apt install libpython2.7-dev
-
-boost:
-sudo apt install libboost-all-dev
-
-python-numpy:
-sudo apt install python-numpy
-
-armadillo:
-sudo apt install libarmadillo6
-sudo apt install libarmadillo-dev
-
-matio:
-sudo apt install libmatio2
-
-latex:
-sudo apt install texlive-full
-
-hunspell:
-sudo apt install hunspell
-
-jabref:
-sudo apt install jabref
-
-unrar:
-sudo apt install unrar
-
-meld:
-sudo apt install meld
