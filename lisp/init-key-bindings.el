@@ -101,6 +101,8 @@
     (define-key map (kbd "C-c p h") 'helm-projectile)
     ;; magit
     (define-key map (kbd "C-c g") 'magit-status)
+    ;; recompile
+    (define-key map (kbd "C-c m") 'recompile)
     map)
   "global-keybindings-minor-mode keymap")
 

@@ -46,4 +46,27 @@
               lua-indent-level 2
               python-indent-offset 4)
 
+;; Compilation:
+;; scroll the compiling output and jump to the first error if has
+(setq compilation-scroll-output 'first-error)
+;; if success, bury the compilation buffer window if success
+(add-hook 'compilation-finish-functions
+          (lambda (buf str)
+            (if (and
+                 (string-match "compilation" (buffer-name buf))
+                 (string-match "finished" str)
+                 (not (with-current-buffer buf (search-forward "error" nil t)))
+                 )
+                ;;no errors, make the compilation window go away in a few secs
+                (progn
+                  (run-at-time
+                   "2 sec" nil 'delete-windows-on
+                   (get-buffer-create "*compilation*"))
+                  (if (not (with-current-buffer buf (search-forward "warning" nil t)))
+                      (message "%s" (propertize "Compilation Warning :?" 'face '(:foreground "yellow")))
+                    (message "%s" (propertize "Compilation Success :)" 'face '(:foreground "green")))))
+              ;; has errors
+              (message "%s" (propertize "Compilation Error :(" 'face '(:foreground "red")))
+              )))
+
 (provide 'init-setup)
