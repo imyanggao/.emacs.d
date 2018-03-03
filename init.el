@@ -17,6 +17,7 @@
 (require 'init-utils)                   ; some utilities' functions and macros, such as after-load
 (require 'init-elpa)                    ; elpa and define require-package function
 (require 'init-themes)                  ; themes
+(require 'init-osdep)                   ; os dependent features
 (require 'init-smart-mode-line)         ; smart-mode-line
 (require 'init-nlinum)                  ; nlinum
 (require 'init-comment-dwim-2)          ; enhanced comment
@@ -33,7 +34,6 @@
 (require 'init-pdf-tools)               ; pdf-tools
 (require 'init-auctex)                  ; auctex
 (require 'init-setup)                   ; preferences
-(require 'init-osdep)                   ; os dependent features
 (require 'init-key-bindings)            ; key bindings
 
 (provide 'init)
