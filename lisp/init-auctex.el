@@ -70,5 +70,11 @@
               ;;                                    (output-dvi "Okular")))
               ))))
 
+;; auto fresh pdf buffer after tex compilcation has finished when use pdf-tools
+(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+
+;; A try to latex-preview-pane, not so good
+;; (require-package 'latex-preview-pane)
+;; (latex-preview-pane-enable)
 
 (provide 'init-auctex)

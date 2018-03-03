@@ -30,6 +30,7 @@
 (require 'init-lua)                     ; lua mode
 (require 'init-ggtags)                  ; GNU Global source code tagging system
 (require 'init-matlab)                  ; matlab mode
+(require 'init-pdf-tools)               ; pdf-tools
 (require 'init-auctex)                  ; auctex
 (require 'init-setup)                   ; preferences
 (require 'init-osdep)                   ; os dependent features

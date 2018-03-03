@@ -25,14 +25,28 @@
 ;; split window inside the current window
 (setq helm-swoop-split-with-multiple-windows t)
 
-;; use patch to fix problem: symbol's value as variable is void helm-swoop-pattern
-;; as suggestion here: https://github.com/ShingoFukuyama/helm-swoop/issues/126
-(defadvice helm-swoop (around helm-swoop-no-full-frame activate)
-  (let ((helm-full-frame nil))
-    ad-do-it))
+;; it seems that this bug has been fixed on 201802, just leave for a while
+;; ;; use patch to fix problem: symbol's value as variable is void helm-swoop-pattern
+;; ;; as suggestion here: https://github.com/ShingoFukuyama/helm-swoop/issues/126
+;; (defadvice helm-swoop (around helm-swoop-no-full-frame activate)
+;;   (let ((helm-full-frame nil))
+;;     ad-do-it))
 
 ;; use helm-projectile
 (require-package 'helm-projectile)
 (helm-projectile-on)
+
+;; use helm-bibtex
+(require-package 'helm-bibtex)
+(setq bibtex-completion-bibliography '("~/Dropbox/References/ref_all.bib"))
+(setq bibtex-completion-library-path '("~/Dropbox/References/pdfs"))
+;; use for bibtex entries with a "File" field (for JabRef)
+(setq bibtex-completion-pdf-field "File")
+(setq bibtex-completion-notes-path "~/Dropbox/References/notes")
+(setq bibtex-completion-pdf-extenaion '(".pdf" ".djvu"))
+;; don't use full frame for helm-bibtex
+(setq helm-bibtex-full-frame nil)
+;; don't use pre-/postnote arguments for citation
+(setq bibtex-completion-cite-prompt-for-optional-arguments nil)
 
 (provide 'init-helm)

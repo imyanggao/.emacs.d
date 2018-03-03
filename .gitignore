@@ -1,5 +1,3 @@
-# ignore all *.el, except init.el
-*.el
-!init.el
+srecode-map.el
 backups
 elpa

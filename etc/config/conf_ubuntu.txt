@@ -17,6 +17,14 @@ sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
 sudo apt install emacs25
 
+(optional: don't need these steps actually, when first launch emacs, all will be installed)
+pdf-tools dependency (for emacs):
+sudo apt install libpng-dev zlib1g-dev
+sudo apt install libpoppler-glib-dev
+sudo apt install libpoppler-private-dev
+sudo apt install imagemagick
+)
+
 Mount disks:
 sudo mkdir /mnt/ssd500
 sudo mkdir /mnt/ssd250
@@ -103,8 +111,18 @@ sudo apt install hunspell
 unrar:
 sudo apt install unrar
 
-jabref (Download latest version intead of this old one):
-sudo apt install jabref
+jabref (Download latest version jar):
+1) install java by:
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt update
+sudo apt install oracle-java8-installer
+2) create ~/.local/share/applications/JabRef.desktop, and write the following to the file:
+[Desktop Entry]
+Type=Application
+Terminal=false
+Icon=/home/ygao/local/install/JabRef-icon.png
+Exec=java -jar /home/ygao/local/install/JabRef-4.1.jar
+Name=JabRef 
 
 matio:
 sudo apt install libmatio2
