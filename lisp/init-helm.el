@@ -32,6 +32,11 @@
 ;;   (let ((helm-full-frame nil))
 ;;     ad-do-it))
 
+;; use helm-descbinds
+(require-package 'helm-descbinds)
+(require 'helm-descbinds)
+(helm-descbinds-mode)
+
 ;; use helm-projectile
 (require-package 'helm-projectile)
 (helm-projectile-on)
