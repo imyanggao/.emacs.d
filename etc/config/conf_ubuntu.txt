@@ -13,6 +13,9 @@ Download from the website
 install with deb package install method and dependence fix
 
 Emacs(easier way):
+1) install font to support powerline in terminal first
+sudo apt install fonts-powerline
+2) install emacs
 sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
 sudo apt install emacs25

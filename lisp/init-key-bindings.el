@@ -80,7 +80,7 @@
 (define-minor-mode global-keybindings-minor-mode
   "a minor mode so that my global keymap could be unified over all modes"
   :init-value t
-  :lighter " global-keybindings")
+  :lighter " Gkbd")
 
 (global-keybindings-minor-mode 1)
 
