@@ -33,6 +33,7 @@
 (require 'init-matlab)                  ; matlab mode
 (require 'init-pdf-tools)               ; pdf-tools
 (require 'init-auctex)                  ; auctex
+(require 'init-shackle)                 ; shackle
 (require 'init-setup)                   ; preferences
 (require 'init-key-bindings)            ; key bindings
 
@@ -47,7 +48,8 @@
     ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(package-selected-packages
    (quote
-    (auctex matlab-mode ggtags lua-mode magit helm-projectile helm-swoop helm projectile auto-complete yasnippet comment-dwim-2 nlinum smart-mode-line ample-zen-theme))))
+    (auctex matlab-mode ggtags lua-mode magit helm-projectile helm-swoop helm projectile auto-complete yasnippet comment-dwim-2 nlinum smart-mode-line ample-zen-theme)))
+)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

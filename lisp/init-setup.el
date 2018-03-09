@@ -1,5 +1,11 @@
 (message "init-setup.el")
 
+;; wrap long lines without inserting line break
+(global-visual-line-mode 1)
+
+;; highlight current row
+(global-hl-line-mode 1)
+
 ;; highlight matching brackets
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -42,6 +48,32 @@
               python-indent-offset 4)
 
 ;; Compilation:
+;; I have used shackle to achieve the following function
+;; ;; vertical split window with special buffer, like *compilation*, *shell*
+;; (setq special-display-buffer-names
+;;       '("*compilation*" "*terminal*" "*shell*"))
+;; (setq special-display-function
+;;       (lambda (buf &optional args)
+;;         (setq bname (buffer-name buf))
+;;         (message buf)
+;;         (cond ((string-match "*compilation*" bname)
+;;                (split-window-vertically)
+;;                (get-buffer-window buf 0))
+;;               ((string-match "*shell*" bname)
+;;                (message "in shell")
+;;                (split-window-vertically)
+;;                (other-window 1)
+;;                (switch-to-buffer buf)
+;;                (get-buffer-window buf 0))
+;;               ((string-match "*terminal*" bname)
+;;                (message "in teriminal")
+;;                (split-window-vertically)
+;;                (other-window 1)
+;;                (switch-to-buffer buf)
+;;                (get-buffer-window buf 0))
+;;               )
+;;         ))
+
 ;; scroll the compiling output and jump to the first error if has
 (setq compilation-scroll-output 'first-error)
 ;; if success, bury the compilation buffer window if success
@@ -54,9 +86,10 @@
                  )
                 ;;no errors, make the compilation window go away in a few secs
                 (progn
-                  (run-at-time
-                   "2 sec" nil 'delete-windows-on
-                   (get-buffer-create "*compilation*"))
+                  (run-at-time "2 sec" nil
+                               'delete-windows-on
+                               (get-buffer-create "*compilation*")
+                               )
                   (if (not (with-current-buffer buf (search-forward "warning" nil t)))
                       (message "%s" (propertize "Compilation Warning :?" 'face '(:foreground "yellow")))
                     (message "%s" (propertize "Compilation Success :)" 'face '(:foreground "green")))))

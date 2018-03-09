@@ -46,7 +46,7 @@
     ;; custom key bindings
     (define-key map (kbd "M-z") 'undo)
     (define-key map (kbd "M-m") 'set-mark-command)
-    (define-key map (kbd "C-q") 'query-replace)
+    (define-key map (kbd "C-q") 'query-replace-regexp)
     (define-key map (kbd "C-j") 'goto-line)
     (define-key map (kbd "C-o") 'other-window)
     (define-key map (kbd "M-1") 'delete-other-windows)
@@ -74,6 +74,8 @@
     (define-key map (kbd "C-c g") 'magit-status)
     ;; recompile
     (define-key map (kbd "C-c m") 'recompile)
+    ;; shell
+    (define-key map (kbd "C-c s") 'shell)
     map)
   "global-keybindings-minor-mode keymap")
 
@@ -126,6 +128,11 @@
             ;; especially for helm-swoop, remap keybindings
             (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward-regexp)
             (define-key pdf-view-mode-map (kbd "C-r") 'isearch-backward-regexp)
+            (define-key pdf-view-mode-map (kbd "C-o") 'other-window)
+            (define-key pdf-view-mode-map (kbd "M-1") 'delete-other-windows)
+            (define-key pdf-view-mode-map (kbd "M-2") 'split-window-below)
+            (define-key pdf-view-mode-map (kbd "M-3") 'split-window-right)
+            (define-key pdf-view-mode-map (kbd "M-0") 'delete-window)
             ;; update pdf buffter by revert-buffer without confirmation
             (define-key pdf-view-mode-map (kbd "r") (lambda () (interactive) (revert-buffer t t)))
             )
