@@ -3,11 +3,33 @@
 ;; wrap long lines without inserting line break
 (global-visual-line-mode 1)
 
+;; set the #column of line wrapping if using:
+;; auctex LaTeX-fill-*, auto-fill-mode, and visual-fill-column-mode
+;; if only using visual-line-mode, this setting will not effect
+(setq-default fill-column 80)
+
 ;; highlight current row
 (global-hl-line-mode 1)
+(set-face-background 'hl-line "grey20") ; color designed for monokai theme
+(set-face-foreground 'highlight nil)
+
+;; ;; cursor blink forever
+;; (setq-default blink-cursor-blinks 0)
+
+;; display current line number and column number by default
+(setq line-number-mode t)
+(setq column-number-mode t)
 
 ;; highlight matching brackets
+(require 'paren)
+(set-face-foreground 'show-paren-match (face-background 'default))
+(set-face-background 'show-paren-match "green")
+(set-face-attribute 'show-paren-match nil :weight 'extra-bold :slant 'italic)
 (setq show-paren-delay 0)
+;; style choices
+;; (setq show-paren-style 'parenthesis)    ; highlight brackets
+;; (setq show-paren-style 'expression)     ; highlight entire expression
+(setq show-paren-style 'mixed)          ; highlight brackets if visible, else entire expression
 (show-paren-mode 1)
 
 ;; auto-save and backup
@@ -47,33 +69,40 @@
               lua-indent-level 2
               python-indent-offset 4)
 
-;; Compilation:
-;; I have used shackle to achieve the following function
-;; ;; vertical split window with special buffer, like *compilation*, *shell*
-;; (setq special-display-buffer-names
-;;       '("*compilation*" "*terminal*" "*shell*"))
-;; (setq special-display-function
-;;       (lambda (buf &optional args)
-;;         (setq bname (buffer-name buf))
-;;         (message buf)
-;;         (cond ((string-match "*compilation*" bname)
-;;                (split-window-vertically)
-;;                (get-buffer-window buf 0))
-;;               ((string-match "*shell*" bname)
-;;                (message "in shell")
-;;                (split-window-vertically)
-;;                (other-window 1)
-;;                (switch-to-buffer buf)
-;;                (get-buffer-window buf 0))
-;;               ((string-match "*terminal*" bname)
-;;                (message "in teriminal")
-;;                (split-window-vertically)
-;;                (other-window 1)
-;;                (switch-to-buffer buf)
-;;                (get-buffer-window buf 0))
-;;               )
-;;         ))
+;; format a region if selected, otherwise the whole buffer. kbd is M-\\
+(defun format-region-or-buffer ()
+  "format a region if selected, otherwise the whole buffer."
+  (interactive)
+  (save-excursion)
+  (if (region-active-p)
+      (progn
+        (delete-trailing-whitespace (region-beginning) (region-end))
+        (untabify (region-beginning) (region-end))
+        (if (derived-mode-p 'latex-mode)
+            (progn
+              (LaTeX-fill-region (region-beginning) (region-end))
+              (message "latex format selected region"))
+          (progn
+            (indent-region (region-beginning) (region-end))
+            (message "format selected region"))
+          )
+        )
+    (progn
+      (delete-trailing-whitespace (point-min) (point-max))
+      (untabify (point-min) (point-max))
+      (if (derived-mode-p 'latex-mode)
+          (progn
+            (LaTeX-fill-region (point-min) (point-max))
+            (message "latex format whole buffer"))
+        (progn
+          (indent-region (point-min) (point-max))
+          (message "format whole buffer"))
+        )
+      )
+    )
+  )
 
+;; Compilation:
 ;; scroll the compiling output and jump to the first error if has
 (setq compilation-scroll-output 'first-error)
 ;; if success, bury the compilation buffer window if success

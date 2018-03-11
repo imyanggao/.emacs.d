@@ -20,6 +20,7 @@
 (require 'init-smart-mode-line)         ; smart-mode-line
 (require 'init-osdep)                   ; os dependent features
 (require 'init-nlinum)                  ; nlinum
+(require 'init-visual-fill-column)      ; visual-fill-column
 (require 'init-comment-dwim-2)          ; enhanced comment
 (require 'init-saveplace)               ; save place for reopen at same position
 (require 'init-spell-check)             ; spelling check
