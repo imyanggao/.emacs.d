@@ -15,7 +15,9 @@ install with deb package install method and dependence fix
 Emacs(easier way):
 1) install font to support powerline in terminal first
 sudo apt install fonts-powerline
-2) install emacs
+2) install silversearcher-ag
+sudo apt install silversearcher-ag
+3) install emacs
 sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
 sudo apt install emacs25
