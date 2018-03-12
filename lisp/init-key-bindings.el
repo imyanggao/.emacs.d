@@ -30,8 +30,6 @@
     (define-key map (kbd "C-r") 'helm-do-grep-ag)
     ;; helm-swoop
     (define-key map (kbd "C-s") 'helm-swoop)
-    ;; helm-projectile (Helm interface to projectile)
-    (define-key map (kbd "C-c p h") 'helm-projectile)
     ;; helm-bibtex
     (define-key map (kbd "C-c b") 'helm-bibtex)
     ;; magit
@@ -81,7 +79,6 @@
             (define-key yas-minor-mode-map (kbd "<tab>") nil)
             (define-key yas-minor-mode-map (kbd "TAB") nil)
             (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand))) ;to avoid <tab> conflict with auto-complete, use C-c k for trigger
-
 ;; pdf-tools
 (add-hook 'pdf-view-mode-hook
           (lambda ()
