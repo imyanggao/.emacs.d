@@ -41,6 +41,9 @@
 (require-package 'helm-projectile)
 (helm-projectile-on)
 
+;; use helm-ag
+(require-package 'helm-ag)
+
 ;; use helm-bibtex
 (require-package 'helm-bibtex)
 (setq bibtex-completion-bibliography '("~/Dropbox/References/ref_all.bib"))
