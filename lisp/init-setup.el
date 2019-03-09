@@ -126,4 +126,23 @@
               (message "%s" (propertize "Compilation Error :(" 'face '(:foreground "red")))
               )))
 
+;; kill or copy the line point is on with a single keystroke
+;; C-w kills the current line
+;; M-w copies the current line
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (message "Kills the current line!")
+     (list (line-beginning-position) (line-end-position)))))
+
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (message "Copies the current line!")
+     (list (line-beginning-position) (line-end-position)))))
+
 (provide 'init-setup)
