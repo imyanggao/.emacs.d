@@ -112,11 +112,11 @@ elif [[ ${OS} == Linux ]] ; then
     ADD_LIB_PATH=/usr/local/cuda-7.0/lib64:${ADD_LIB_PATH}
   elif [[ ${HOSTNAME} == tj ]] ; then
     LOCAL=""
-    ADD_PATH=${HOME}/Applications/bin:/usr/local/cuda/bin:${ADD_PATH}
+    ADD_PATH=${HOME}/Applications/bin:/usr/local/cuda/bin:${HOME}/.local/bin:${ADD_PATH}
     for d in ${HOME}/Applications/pkg/*/bin; do
       ADD_PATH=${d}:${ADD_PATH}
     done
-    export LD_LIBRARY_PATH=${HOME}/local/install/cudnn:$LD_LIBRARY_PATH
+    ADD_LIB_PATH=${HOME}/local/install/cudnn:${HOME}/local/nccl/build/lib
     export CUDNN_PATH=${HOME}/local/install/cudnn/lib64/libcudnn.so.5
     export MATLAB_ROOT=/usr/local/MATLAB/R2017a
   fi
