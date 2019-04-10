@@ -58,6 +58,8 @@
 (tool-bar-mode -1)
 ;; disable the scrollbar
 (toggle-scroll-bar -1)
+;; specify init frame size
+(when window-system (set-frame-size (selected-frame) 80 32))
 
 ;; use spaces instead of tabs, and set default tab width
 (setq-default indent-tabs-mode nil)
